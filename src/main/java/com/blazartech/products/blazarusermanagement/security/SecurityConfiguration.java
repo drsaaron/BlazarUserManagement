@@ -52,6 +52,7 @@ public class SecurityConfiguration {
                 .requestMatchers(request -> request.getRequestURI().startsWith("/api/v1")).authenticated()
                 .requestMatchers(request -> request.getRequestURI().startsWith("/monitoring")).permitAll()
                 .requestMatchers(request -> request.getRequestURI().startsWith("/v3/api-docs")).permitAll()
+                .requestMatchers("/swagger-ui.html", "/swagger-ui/**").permitAll()
                 .and()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

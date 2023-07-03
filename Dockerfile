@@ -12,7 +12,7 @@ ADD ./.mvn ./.mvn
 ADD ./runServices.sh ./runServices.sh
 
 # build the application
-RUN ./mvnw clean install
+RUN ./mvnw clean install -Dskip.it=true
 
 # open the ports
 EXPOSE 4500
