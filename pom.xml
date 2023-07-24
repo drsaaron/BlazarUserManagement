@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blazartech</groupId>
     <artifactId>BlazarUserManagement</artifactId>
-    <version>1.2-RELEASE</version>
+    <version>1.3-RELEASE</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -14,7 +14,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.0.6</version>
+        <version>3.1.2</version>
     </parent>
     
     <description>A simple set of services to maintain user roles</description>
@@ -95,7 +95,7 @@
         <dependency>
             <groupId>com.blazartech</groupId>
             <artifactId>BlazarUserManagement-tokenUtil</artifactId>
-            <version>1.1-RELEASE</version>
+            <version>1.2-RELEASE</version>
         </dependency>
 
         <dependency>
