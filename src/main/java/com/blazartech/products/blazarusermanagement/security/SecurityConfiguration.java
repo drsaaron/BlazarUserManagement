@@ -5,6 +5,7 @@
  */
 package com.blazartech.products.blazarusermanagement.security;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.SecurityFilterChain;
 
 /**
@@ -38,27 +40,26 @@ public class SecurityConfiguration {
     @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder auth = http.getSharedObject(AuthenticationManagerBuilder.class);
-        return auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder).and().build();
-        /*auth.authenticationProvider(myAuthenticationProvider);
-      return auth.build();*/
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+        return auth.build();
     }
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
 
+        AuthenticationEntryPoint aep = (request, response, authException) -> { response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized"); };
         http
-                .authorizeHttpRequests()
-                .requestMatchers(request -> request.getRequestURI().startsWith("/authenticate")).permitAll()
-                .requestMatchers(request -> request.getRequestURI().startsWith("/api/v1")).authenticated()
-                .requestMatchers(request -> request.getRequestURI().startsWith("/monitoring")).permitAll()
-                .requestMatchers(request -> request.getRequestURI().startsWith("/v3/api-docs")).permitAll()
-                .requestMatchers("/swagger-ui.html", "/swagger-ui/**").permitAll()
-                .and()
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .csrf().disable()
-                .httpBasic();
+                .authorizeHttpRequests(
+                        authz -> authz
+                                .requestMatchers(request -> request.getRequestURI().startsWith("/authenticate")).permitAll()
+                                .requestMatchers(request -> request.getRequestURI().startsWith("/api/v1")).authenticated()
+                                .requestMatchers(request -> request.getRequestURI().startsWith("/monitoring")).permitAll()
+                                .requestMatchers(request -> request.getRequestURI().startsWith("/v3/api-docs")).permitAll()
+                                .requestMatchers("/swagger-ui.html", "/swagger-ui/**").permitAll()
+                )
+                .sessionManagement(smc -> smc.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(f -> f.disable())
+                .httpBasic(b -> b.authenticationEntryPoint(aep));
         return http.build();
 
     }
