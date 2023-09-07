@@ -21,6 +21,7 @@ import com.blazartech.products.blazarusermanagement.data.access.impl.jpa.repos.U
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -106,15 +107,13 @@ public class UserManagementDataAccessImpl implements UserManagementDataAccess {
         UserDataEntity user = userRepository.findByUserId(userID);
 
         // is the role already there?
-        Collection<UserRoleEntity> currentRoles = user.getUserRoleEntityCollection();
-        if (currentRoles != null) {
-            for (UserRoleEntity ure : currentRoles) {
-                if (ure.getUserRoleTypeCde().getUserRoleTypeTxt().equals(newRole)) {
-                    // already there.
-                    logger.info("role already there.");
-                    return buildUser(user);
-                }
-            }
+        Optional<UserRoleEntity> foundRole = user.getUserRoleEntityCollection().stream()
+                .filter(r -> r.getUserRoleTypeCde().getUserRoleTypeTxt().equals(newRole))
+                .findFirst();
+        if (foundRole.isPresent()) {
+            // already there.
+            logger.info("role already there.");
+            return buildUser(user);
         }
 
         // not there so add.
@@ -122,10 +121,12 @@ public class UserManagementDataAccessImpl implements UserManagementDataAccess {
         UserRoleEntity ue = new UserRoleEntity();
         ue.setUserNum(user);
         ue.setUserRoleTypeCde(roleType);
+
         userRoleRepository.save(ue);
 
         // re-retrieve the user to get the update
         user = userRepository.findByUserId(userID);
+
         return buildUser(user);
     }
 
