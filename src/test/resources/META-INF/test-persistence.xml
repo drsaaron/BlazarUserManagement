@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="com.blazartech_BlazarUserManagement_test_jar_1.0-SNAPSHOTPU">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.blazartech.products.blazarusermanagement.data.access.impl.jpa.UserRoleTypeValEntity</class>
+        <class>com.blazartech.products.blazarusermanagement.data.access.impl.jpa.UserRoleEntity</class>
+        <class>com.blazartech.products.blazarusermanagement.data.access.impl.jpa.UserDataEntity</class>
+        <properties>
+            <property name="hibernate.generate_statistics" value="false"/>
+            <property name="hibernate.cache.use_structured_entries" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+        </properties>
+    </persistence-unit>
+</persistence>

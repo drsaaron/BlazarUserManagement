@@ -21,6 +21,7 @@ import com.blazartech.products.blazarusermanagement.data.access.impl.jpa.repos.U
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -70,13 +71,14 @@ public class UserManagementDataAccessImpl implements UserManagementDataAccess {
     private UserInformation buildUser(UserDataEntity ue) {
         if (ue != null) {
             List<String> roles = new ArrayList<>();
-            UserInformation ui = new UserInformation(ue.getUserId(), ue.getDisplayName(), roles, "<PROTECTED>");
 
             if (ue.getUserRoleEntityCollection() != null) {
-                ue.getUserRoleEntityCollection().forEach((ure) -> {
-                    roles.add(ure.getUserRoleTypeCde().getUserRoleTypeTxt());
-                });
+                ue.getUserRoleEntityCollection().stream()
+                        .map(r -> r.getUserRoleTypeCde().getUserRoleTypeTxt())
+                        .forEach(roles::add);
             }
+
+            UserInformation ui = new UserInformation(ue.getUserId(), ue.getDisplayName(), roles, "<PROTECTED>");
 
             return ui;
         } else {
@@ -89,10 +91,9 @@ public class UserManagementDataAccessImpl implements UserManagementDataAccess {
         logger.info("getting list of roles");
 
         Collection<UserRoleTypeValEntity> roleData = roleRepository.findAll();
-        List<String> roles = new ArrayList<>();
-        roleData.forEach((r) -> {
-            roles.add(r.getUserRoleTypeTxt());
-        });
+        List<String> roles = roleData.stream()
+                .map(r -> r.getUserRoleTypeTxt())
+                .collect(Collectors.toList());
 
         return roles;
     }
