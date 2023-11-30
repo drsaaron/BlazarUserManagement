@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.blazartech.products.blazarusermanagement.data.access.impl;
+package com.blazartech.products.blazarusermanagement.data.access.impl.jpa.config;
 
 import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,10 +21,10 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
         basePackages = {
             "com.blazartech.products.blazarusermanagement.data.access.impl.jpa.repos"
         },
-        entityManagerFactoryRef = "testEntityManager",
+        entityManagerFactoryRef = "entityManager",
         transactionManagerRef = "transactionManager"
 )
-public class TestEntityManagerConfiguration {
+public class EntityManagerConfiguration {
     
     @Autowired
     private DataSource dataSource;
@@ -33,12 +33,12 @@ public class TestEntityManagerConfiguration {
     private JpaVendorAdapter jpaVendorAdapter;
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean testEntityManager() {
+    public LocalContainerEntityManagerFactoryBean entityManager() {
         LocalContainerEntityManagerFactoryBean f = new LocalContainerEntityManagerFactoryBean();
         f.setDataSource(dataSource);
-        f.setPersistenceXmlLocation("classpath:META-INF/test-persistence.xml");
+        f.setPersistenceXmlLocation("classpath:META-INF/persistence.xml");
         f.setJpaVendorAdapter(jpaVendorAdapter);
-        f.setPersistenceUnitName("com.blazartech_BlazarUserManagement_test_jar_1.0-SNAPSHOTPU");
+        f.setPersistenceUnitName("com.blazartech_BlazarUserManagement_jar_1.0-SNAPSHOTPU");
 
         return f;
     }

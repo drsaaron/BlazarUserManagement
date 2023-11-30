@@ -6,6 +6,8 @@ package com.blazartech.products.blazarusermanagement.data.access.impl;
 
 import com.blazartech.products.blazarusermanagement.data.UserInformation;
 import com.blazartech.products.blazarusermanagement.data.access.impl.jpa.UserRoleEntity;
+import com.blazartech.products.blazarusermanagement.data.access.impl.jpa.config.JpaVendorAdapterConfiguration;
+import com.blazartech.products.blazarusermanagement.data.access.impl.jpa.config.TransactionManagerConfiguration;
 import com.blazartech.products.blazarusermanagement.data.access.impl.jpa.repos.UserRoleEntityRepository;
 import jakarta.transaction.Transactional;
 import java.util.Collection;
@@ -36,8 +38,8 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
     UserManagementDataAccessImplTest.UserManagementDataAccessImplTestConfiguration.class,
     TestDataSourceConfiguration.class,
     TestEntityManagerConfiguration.class,
-    TestJpaVendorAdapter.class,
-    TestTransactionManagerConfiguration.class
+    JpaVendorAdapterConfiguration.class,
+    TransactionManagerConfiguration.class
 })
 @Transactional
 public class UserManagementDataAccessImplTest {
