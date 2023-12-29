@@ -21,11 +21,15 @@ public class JpaVendorAdapterConfiguration {
     @Value("${app.jpa.dbtype}")
     private String dbType;
     
+    @Value("${app.jpa.dialect}")
+    private String dbDialect;
+    
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter va = new HibernateJpaVendorAdapter();
         va.setShowSql(true);
         va.setDatabase(Database.valueOf(dbType));
+        va.setDatabasePlatform(dbDialect);
         va.setGenerateDdl(true);
         return va;
     }
