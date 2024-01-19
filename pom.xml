@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blazartech</groupId>
     <artifactId>BlazarUserManagement</artifactId>
-    <version>1.18-RELEASE</version>
+    <version>1.19-RELEASE</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,7 +13,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.2.1</version>
+        <version>3.2.2</version>
     </parent>
     
     <description>A simple set of services to maintain user roles</description>
@@ -94,7 +94,7 @@
         <dependency>
             <groupId>com.blazartech</groupId>
             <artifactId>BlazarUserManagement-tokenUtil</artifactId>
-            <version>1.13-RELEASE</version>
+            <version>1.14-RELEASE</version>
         </dependency>
 
         <dependency>
@@ -161,27 +161,6 @@
                         </configuration>
                     </execution>
                 </executions> 
-            </plugin>
-
-            <plugin>
-                <artifactId>maven-deploy-plugin</artifactId>
-                <version>3.1.1</version>
-                <executions>
-                    <execution>
-                        <id>default-deploy</id>
-                        <phase>deploy</phase>
-                        <goals>
-                            <goal>deploy</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-
-            <!-- plugin to make junit5 work -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
             </plugin>
             
             <!-- generate the openAPI json file.  disabled because of cert issues -->
