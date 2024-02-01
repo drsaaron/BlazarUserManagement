@@ -4,8 +4,9 @@
  */
 package com.blazartech.products.blazarusermanagement.data.access.impl;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,12 +31,15 @@ public class TestDataSourceConfiguration {
 
     @Bean
     public DataSource dataSource() {
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(driverClass);
-        ds.setUrl(url);
-        ds.setUsername(user);
-        ds.setPassword("blah");
-
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url);
+        config.setUsername(user);
+        config.setPassword("blah");
+        config.setDriverClassName(driverClass);
+        config.setMaximumPoolSize(5);
+        
+        DataSource ds = new HikariDataSource(config);
+        
         return ds;
     }
 

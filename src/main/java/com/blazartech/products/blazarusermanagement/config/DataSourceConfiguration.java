@@ -6,8 +6,9 @@
 package com.blazartech.products.blazarusermanagement.config;
 
 import com.blazartech.products.crypto.BlazarCryptoFile;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,24 @@ public class DataSourceConfiguration {
     @Autowired
     private BlazarCryptoFile cryptoFile;
 
-    public DataSource buildDataSource(String userID, String resourceID, String driverClass, String url, int poolSize) {
+    public DataSource buildDataSource(String userID, String resourceID, String driverClass, String url, int poolSize) {        
         logger.info("building data source for " + url + " via dbcp");
-        BasicDataSource ds = new BasicDataSource();
-        ds.setDriverClassName(driverClass);
-        ds.setUrl(url);
-        ds.setUsername(userID);
-        ds.setPassword(cryptoFile.getPassword(userID, resourceID));
-        ds.setInitialSize(poolSize);
-        ds.setMaxTotal(poolSize);
+        
+        HikariConfig config = new HikariConfig();
+        config.setJdbcUrl(url);
+        config.setUsername(userID);
+        config.setPassword(cryptoFile.getPassword(userID, resourceID));
+        config.setDriverClassName(driverClass);
+        config.setMaximumPoolSize(poolSize);
+        config.setPoolName("user-management-pool");
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+        
+        DataSource ds = new HikariDataSource(config);
+        
         return ds;
+
     }
 
     @Value("${database.url}")
