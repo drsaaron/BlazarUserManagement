@@ -61,10 +61,10 @@ public class UserManagementUserDetailsServiceTest {
     @Autowired
     private UserManagementUserDetailsService instance;
     
-    @MockBean
+    @MockitoBean
     private UserDataEntityRepository userRepository;
     
-    @MockBean
+    @MockitoBean
     private UserRoleEntityRepository roleRepository;
     
     private static final String TEST_USER = "myUser";
