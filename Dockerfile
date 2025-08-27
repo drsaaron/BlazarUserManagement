@@ -18,7 +18,7 @@ RUN ./mvnw clean install -Dskip.it=true
 EXPOSE 4500
 
 # define this as the production environment
-ENV ENVIRONMENT prod
+ENV ENVIRONMENT=prod
 
 # run the script
 CMD ./runServices.sh
