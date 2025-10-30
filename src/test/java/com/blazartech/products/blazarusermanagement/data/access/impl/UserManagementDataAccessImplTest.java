@@ -24,6 +24,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.jdbc.Sql;
@@ -47,6 +48,7 @@ public class UserManagementDataAccessImplTest {
     private static final Logger logger = LoggerFactory.getLogger(UserManagementDataAccessImplTest.class);
     
     @Configuration
+    @PropertySource("classpath:unittest.properties")
     public static class UserManagementDataAccessImplTestConfiguration {
         
         @Bean
