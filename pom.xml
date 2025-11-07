@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blazartech</groupId>
     <artifactId>BlazarUserManagement</artifactId>
-    <version>1.39-RELEASE</version>
+    <version>1.40-RELEASE</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,7 +13,7 @@
     <parent>
         <groupId>com.blazartech</groupId>
         <artifactId>blazarjavaparent</artifactId>
-        <version>1.14-RELEASE</version>
+        <version>1.15-RELEASE</version>
     </parent>
     
     <description>A simple set of services to maintain user roles</description>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.blazartech</groupId>
             <artifactId>BlazarUserManagement-tokenUtil</artifactId>
-            <version>1.30-RELEASE</version>
+            <version>1.31-RELEASE</version>
         </dependency>
 
         <dependency>
