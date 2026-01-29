@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.blazartech</groupId>
     <artifactId>BlazarUserManagement</artifactId>
-    <version>1.42-RELEASE</version>
+    <version>1.43-RELEASE</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -13,7 +13,7 @@
     <parent>
         <groupId>com.blazartech</groupId>
         <artifactId>blazarjavaparent</artifactId>
-        <version>1.16-RELEASE</version>
+        <version>1.18-RELEASE</version>
     </parent>
     
     <description>A simple set of services to maintain user roles</description>
@@ -60,7 +60,7 @@
         <dependency>
             <groupId>com.blazartech</groupId>
             <artifactId>BlazarUserManagement-tokenUtil</artifactId>
-            <version>1.32-RELEASE</version>
+            <version>1.33-RELEASE</version>
         </dependency>
 
         <dependency>
@@ -83,7 +83,7 @@
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-            <version>3.0.0</version>
+            <version>3.0.1</version>
         </dependency>
         
         <dependency>
