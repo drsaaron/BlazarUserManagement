@@ -1,4 +1,4 @@
-FROM drsaaron/blazarjavabase:1.63
+FROM drsaaron/blazarjavabase:e59d111feeff.1
 
 # create an app directory
 ENV BLAZAR_APP_DIR=/home/blazar/blazarusermangement/app
