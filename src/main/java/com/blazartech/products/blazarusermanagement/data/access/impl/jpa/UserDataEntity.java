@@ -19,14 +19,12 @@ import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Temporal;
-import jakarta.persistence.TemporalType;
 import jakarta.persistence.Transient;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -70,13 +68,11 @@ public class UserDataEntity implements Serializable {
     @Null
     @Transient
     @Column(name = "ROW_CREATE_DTM")
-    @Temporal(TemporalType.TIMESTAMP)
     private Date rowCreateDtm;
     
     @Basic(optional = true)
     @Null
     @Column(name = "LAST_MODIFIED_DTM")
-    @Temporal(TemporalType.TIMESTAMP)
     @Transient
     private Date lastModifiedDtm;
     
