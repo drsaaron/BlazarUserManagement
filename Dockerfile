@@ -21,4 +21,4 @@ EXPOSE 4500
 ENV ENVIRONMENT=prod
 
 # run the script
-CMD ./runServices.sh
+CMD [ "sh", "-c", "./runServices.sh" ]
